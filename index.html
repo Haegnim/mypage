@@ -76,11 +76,26 @@
                 margin-right: 5px;
             }
         </style>
+        <script>
+            //로딩이 완료되면 자동으로 실행됨
+            $(document).ready(function () {
+                fetch('http://spartacodingclub.shop/sparta_api/weather/seoul')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        let temp = data['temp'];
+                        console.log(temp);
+                        let temp_html = temp;
+                        $('#temp').empty();
+                        $('#temp').append(temp_html);
+                    });
+            });
+        </script>
     </head>
     <body>
         <div class="mytitle">
             <h1>내 생애 최고의 영화들</h1>
-            <button>영화 기록하기</button>
+            <div>현재 서울의 날씨 : <span id="temp">20</span>도</div>
+            <button onclick="hey()">영화 기록하기</button>
         </div>
         <div class="mypost">
             <div class="form-floating mb-3">
@@ -91,6 +106,17 @@
                     placeholder="name@example.com"
                 />
                 <label for="floatingInput">영화URL</label>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">별점</label>
+                <select class="form-select" id="inputGroupSelect01">
+                    <option selected>--선택하기--</option>
+                    <option value="1">⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                </select>
             </div>
             <div class="form-floating">
                 <textarea
